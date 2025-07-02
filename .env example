@@ -1,0 +1,5 @@
+# === Mistral API Key ===
+MISTRAL_API_KEY=XXXXXXXXXXXXXXXXX
+
+# === Google Calendar Config ===
+CALENDAR_ID=my-calendar-id@gmail.com
