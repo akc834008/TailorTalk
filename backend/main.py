@@ -1,5 +1,17 @@
 # backend/main.py
 
+import os
+
+# ✅ Copy Render Secret File (credential_json) to expected path
+os.makedirs("config", exist_ok=True)
+render_secret_path = "/etc/secrets/credential_json"
+local_credential_path = "config/credential.json"
+
+if os.path.exists(render_secret_path):
+    with open(render_secret_path, "r") as src:
+        with open(local_credential_path, "w") as dst:
+            dst.write(src.read())
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.agent import run_agent
