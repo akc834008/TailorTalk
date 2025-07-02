@@ -1,4 +1,3 @@
-# frontend/app.py
 import streamlit as st
 import requests
 
@@ -9,11 +8,20 @@ if "chat" not in st.session_state:
 
 user_input = st.chat_input("Type your message...")
 
-
 if user_input:
     st.session_state.chat.append(("You", user_input))
-    response = requests.post("http://127.0.0.1:8000/chat", json={"message": user_input})
-    reply = response.json()["response"]
+
+    try:
+        # ✅ Send request to deployed backend on Render
+        response = requests.post(
+            "https://tailortalk-zg9s.onrender.com/chat",
+            json={"message": user_input},
+            timeout=10
+        )
+        reply = response.json()["response"]
+    except Exception as e:
+        reply = f"❌ Error: {str(e)}"
+
     st.session_state.chat.append(("Bot", reply))
 
 for sender, msg in st.session_state.chat:
