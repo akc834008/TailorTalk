@@ -16,7 +16,7 @@ if user_input:
         response = requests.post(
             "https://tailortalk-zg9s.onrender.com/chat",
             json={"message": user_input},
-            timeout=10
+            timeout=30
         )
         reply = response.json()["response"]
     except Exception as e:
